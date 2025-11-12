@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treball de Fi de Grau</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #3498db;
+            --secondary: #2c3e50;
+            --accent: #e74c3c;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --card-bg: #ffffff;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+        
+        body {
+            background: linear-gradient(to bottom, #f0f7ff, #e6f2ff);
+            color: var(--dark);
+            line-height: 1.6;
+            padding-bottom: 40px;
+            min-height: 100vh;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), #1a6ca6);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            z-index: 0;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            font-weight: 300;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .profile-section {
+            display: flex;
+            align-items: center;
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 40px auto;
+            box-shadow: 0 8px 20px var(--shadow);
+            max-width: 900px;
+            border: 1px solid rgba(52, 152, 219, 0.15);
+            transition: transform 0.3s ease;
+        }
+        
+        .profile-section:hover {
+            transform: translateY(-5px);
+        }
+        
+        .profile-img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 4px solid var(--primary);
+            object-fit: cover;
+            margin-right: 30px;
+            box-shadow: 0 5px 15px var(--shadow);
+            background: linear-gradient(45deg, #e3f2fd, #bbdefb);
+        }
+        
+        .profile-info {
+            flex: 1;
+        }
+        
+        .profile-info h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+        
+        .profile-info p {
+            margin: 8px 0;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .info-icon {
+            color: var(--primary);
+            margin-right: 10px;
+            width: 22px;
+            text-align: center;
+        }
+        
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            background: var(--secondary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 4px 8px rgba(44, 62, 80, 0.2);
+        }
+        
+        .github-link:hover {
+            background: #1a252f;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(44, 62, 80, 0.3);
+        }
+        
+        .github-link i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .section-title {
+            font-size: 2.2rem;
+            text-align: center;
+            margin: 50px 0 30px;
+            position: relative;
+            color: var(--secondary);
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px var(--shadow);
+            border-top: 4px solid var(--primary);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(52, 152, 219, 0.15);
+        }
+        
+        .card-title {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(52, 152, 219, 0.1);
+        }
+        
+        .card-title i {
+            margin-right: 15px;
+            background: rgba(52, 152, 219, 0.1);
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.4rem;
+        }
+        
+        .file-list {
+            list-style: none;
+            flex: 1;
+        }
+        
+        .file-list li {
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+        
+        .file-list li:hover {
+            background: rgba(52, 152, 219, 0.03);
+            border-radius: 8px;
+            padding-left: 10px;
+        }
+        
+        .file-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .file-icon {
+            margin-right: 15px;
+            color: var(--primary);
+            font-size: 1.3rem;
+            width: 24px;
+            text-align: center;
+        }
+        
+        .file-link {
+            color: var(--dark);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            flex: 1;
+            font-weight: 500;
+        }
+        
+        .file-link:hover {
+            color: var(--primary);
+        }
+        
+        .download-btn {
+            background: rgba(52, 152, 219, 0.1);
+            border: none;
+            color: var(--primary);
+            border-radius: 8px;
+            padding: 8px 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .download-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .download-btn i {
+            margin-right: 6px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px 20px;
+            color: var(--dark);
+            font-size: 1rem;
+            background: white;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .footer-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .footer-content p {
+            margin: 8px 0;
+        }
+        
+        .university {
+            font-weight: 600;
+            color: var(--primary);
+            margin-top: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .profile-section {
+                flex-direction: column;
+                text-align: center;
+                padding: 25px;
+            }
+            
+            .profile-img {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+            
+            .profile-info p {
+                justify-content: center;
+            }
+            
+            .github-link {
+                margin: 15px auto 0;
+            }
+            
+            h1 {
+                font-size: 2.3rem;
+            }
+            
+            .section-title {
+                font-size: 1.9rem;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <h1>Treball de Fi de Grau</h1>
+            <p class="subtitle">Classificació de senyals EEG mitjançant tècniques d'aprenentatge automàtic </p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section class="profile-section">
+            <img src="foto.jpeg" alt="Foto de perfil" class="profile-img">
+            <div class="profile-info">
+                <h2>David Martí Felip</h2>
+                <p><i class="fas fa-graduation-cap info-icon"></i> Grau en Enginyeria de Dades</p>
+                <p><i class="fas fa-university info-icon"></i> Universitat Autònoma de Barcelona</p>
+                <p><i class="fas fa-envelope info-icon"></i> davidmartif@autonoma.cat</p>
+                <p><i class="fas fa-calendar-alt info-icon"></i> Curs 2024-2025</p>
+                <a href="https://github.com/davidmartifelip/EEG-classifier" class="github-link" target="_blank">
+                    <i class="fab fa-github"></i> Repositori GitHub del Projecte
+                </a>
+            </div>
+        </section>
+        
+        <h2 class="section-title">Contingut del Treball</h2>
+        <div class="content-grid">
+            <!-- Arxius de Codi -->
+            <div class="card">
+                <h3 class="card-title"><i class="fas fa-code"></i> Arxius de Codi</h3>
+                <ul class="file-list">
+                    <li>
+                        <i class="fas fa-file-code file-icon"></i>
+                        <a href="codi/visualitzacions.py" class="file-link" download>Ingesta de dades i definició de les funcions de visualització</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-file-code file-icon"></i>
+                        <a href="codi/exploracio.ipynb" class="file-link" download>Exploració de les dades</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-file-code file-icon"></i>
+                        <a href="codi/classifier1.ipynb" class="file-link" download>Reducció de dimensionalitat</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-file-code file-icon"></i>
+                        <a href="codi/classifier2.ipynb" class="file-link" download>Anàlisi de features i model</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Informes -->
+            <div class="card">
+                <h3 class="card-title"><i class="fas fa-file-alt"></i> Informes</h3>
+                <ul class="file-list">
+                    <li>
+                        <i class="fas fa-file-pdf file-icon"></i>
+                        <a href="informes/Informe_inicial.pdf" class="file-link" download>Informe Inicial</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-file-pdf file-icon"></i>
+                        <a href="informes/Informe de Progres_1.pdf" class="file-link" download>Informe de seguiment 1</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-file-pdf file-icon"></i>
+                        <a href="informes/Informe_de seguiment_2.pdf" class="file-link" download>Informe de seguiment 2</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-file-pdf file-icon"></i>
+                        <a href="informes/Informe_Final.pdf" class="file-link" download>Informe final</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-file-pdf file-icon"></i>
+                        <a href="informes/Diari_de_treball.pdf" class="file-link" download>Diari de treball</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-file-pdf file-icon"></i>
+                        <a href="informes/Llistat_de_canvis.pdf" class="file-link" download>Llistat de canvis</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Presentació -->
+            <div class="card">
+                <h3 class="card-title"><i class="fas fa-book"></i> Presentació</h3>
+                <ul class="file-list">
+                    <li>
+                        <i class="fas fa-file-alt file-icon"></i>
+                        <a href="Defensa.pdf" class="file-link">Presentació </a>
+                    </li>
+                </ul>
+                <div style="margin-top: 30px; text-align: center;">
+                    <label style="display: block; font-size: 1.1rem; color: var(--secondary); margin-bottom: 10px;">
+                        <i class="fas fa-volume-up" style="color: var(--primary); margin-right: 8px;"></i>
+                        Escolta el resum del treball (IA)
+                    </label>
+                    <audio controls style="width: 90%; max-width: 400px; border-radius: 10px; box-shadow: 0 4px 12px var(--shadow); background: var(--light);">
+                        <source src="audio_resum.wav" type="audio/wav">
+                        El teu navegador no suporta l'element d'àudio.
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <p>Treball de Fi de Grau realitzat per David Martí Felip</p>
+            <p>Tutora: Silvana Silva Pereira</p>
+            <p class="university">Enginyeria de dades - Universitat autònoma de Barcelona</p>
+            <p>© 2025 - Tots els drets reservats</p>
+        </div>
+    </footer>
+</body>
+</html>
